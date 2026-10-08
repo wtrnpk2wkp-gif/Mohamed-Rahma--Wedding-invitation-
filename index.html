@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mohamed & Rahma | Wedding Invitation</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: #faf9f7;
+      color: #2c2c2c;
+      text-align: center;
+    }
+
+    /* LANGUAGE BUTTONS */
+
+    .lang {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
+    }
+
+    .lang button {
+      width: auto;
+      padding: 7px 12px;
+      margin: 2px;
+      background: rgba(255,255,255,.85);
+      color: #2c2c2c;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+
+    /* HERO */
+
+    .hero {
+      padding: 150px 20px;
+      background:
+        linear-gradient(rgba(70,20,30,0.45), rgba(70,20,30,0.25)),
+        url("https://images.unsplash.com/photo-1523438885200-e635ba2c371e");
+      background-size: cover;
+      background-position: center;
+      color: white;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 55px;
+      font-weight: 400;
+      margin-bottom: 18px;
+    }
+
+    .date {
+      font-size: 18px;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      margin-top: 18px;
+    }
+
+
+    /* MUSIC */
+
+    .music {
+      padding: 60px 20px;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 30px;
+      font-weight: 400;
+    }
+
+
+    /* COUNTDOWN */
+
+    #countdown {
+      padding: 35px 20px;
+      background: #6b303d;
+      color: #f7eee7;
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      letter-spacing: 2px;
+    }
+
+
+    /* DETAILS */
+
+    .details {
+      padding: 70px 20px;
+    }
+
+    .details p {
+      margin: 14px 0;
+      font-size: 15px;
+    }
+
+
+    /* SCHEDULE */
+
+    .schedule {
+      padding: 70px 20px;
+      background: #f1e5dc;
+    }
+
+    .schedule-item {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 18px 0;
+      border-bottom: 1px solid #d7c5bd;
+    }
+
+    .schedule-time {
+      font-family: 'Playfair Display', serif;
+      font-size: 25px;
+      color: #6b303d;
+    }
+
+    .schedule-name {
+      margin-top: 6px;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+
+    /* DRESS CODE */
+
+    .dress-code {
+      padding: 70px 20px;
+    }
+
+    .dress-code p {
+      max-width: 550px;
+      margin: auto;
+      line-height: 1.8;
+      font-family: 'Playfair Display', serif;
+      font-size: 21px;
+    }
+
+
+    /* MAP */
+
+    .map {
+      width: 100%;
+      height: 300px;
+      border: 0;
+      margin-top: 20px;
+    }
+
+
+    /* RSVP */
+
+    .rsvp {
+      padding: 70px 20px;
+    }
+
+    form {
+      max-width: 320px;
+      margin: auto;
+    }
+
+    input,
+    select,
+    form button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    form button {
+      background: #6b303d;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background: #4f202c;
+    }
+
+
+    /* GALLERY */
+
+    .gallery {
+      padding: 70px 20px;
+      background: #f1e5dc;
+    }
+
+    .photos {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .photos img {
+      width: 280px;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+
+    /* FOOTER */
+
+    .footer {
+      padding: 50px 20px;
+      background: #6b303d;
+      color: #f7eee7;
+    }
+
+    .footer p {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+    }
+
+
+    /* MOBILE */
+
+    @media(max-width:600px) {
+
+      .hero {
+        padding: 130px 20px;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .date {
+        font-size: 16px;
+      }
+
+      .subtitle {
+        font-size: 14px;
+      }
+
+      #countdown {
+        font-size: 21px;
+      }
+
+      .photos img {
+        width: 90%;
+        max-width: 320px;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+<!-- LANGUAGE -->
+
+<div class="lang">
+  <button onclick="setLang('en')">EN</button>
+  <button onclick="setLang('fr')">FR</button>
+  <button onclick="setLang('ar')">AR</button>
+</div>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <h1 id="title">
+    Mohamed & Rahma
+  </h1>
+
+  <p class="date" id="date">
+    November 7, 2026 • 8:00 PM
+  </p>
+
+  <p class="subtitle" id="invite">
+    You are invited to celebrate our wedding
+  </p>
+
+</section>
+
+
+<!-- MUSIC -->
+
+<section class="music">
+
+  <h2>
+    Our Song 🎶
+  </h2>
+
+  <iframe
+    style="border-radius:12px"
+    src="https://open.spotify.com/embed/track/6Qyc6fS4DsZjB2mRW9DsQs?si=BThx52WNRXifw_1nkBJm6g"
+    width="300"
+    height="80"
+    frameborder="0"
+    allow="autoplay; clipboard-write; encrypted-media;">
+  </iframe>
+
+</section>
+
+
+<!-- COUNTDOWN -->
+
+<div id="countdown">
+  Loading countdown...
+</div>
+
+
+<!-- DETAILS -->
+
+<section class="details">
+
+  <h2>
+    Wedding Details
+  </h2>
+
+  <p>
+    <strong>Date:</strong>
+    November 7, 2026
+  </p>
+
+  <p>
+    <strong>Time:</strong>
+    8:00 PM
+  </p>
+
+  <p>
+    <strong>Venue:</strong>
+    Moment Villa
+  </p>
+
+  <p>
+    <strong>Dress Code:</strong>
+    Elegant & Formal Attire
+  </p>
+
+</section>
+
+
+<!-- SCHEDULE -->
+
+<section class="schedule">
+
+  <h2>
+    Wedding Day Schedule
+  </h2>
+
+  <div class="schedule-item">
+
+    <div class="schedule-time">
+      8:00 PM
+    </div>
+
+    <div class="schedule-name">
+      Welcome & Reception
+    </div>
+
+  </div>
+
+
+  <div class="schedule-item">
+
+    <div class="schedule-time">
+      8:30 PM
+    </div>
+
+    <div class="schedule-name">
+      Dance & Celebration
+    </div>
+
+  </div>
+
+
+  <div class="schedule-item">
+
+    <div class="schedule-time">
+      9:30 PM
+    </div>
+
+    <div class="schedule-name">
+      Dinner
+    </div>
+
+  </div>
+
+
+  <div class="schedule-item">
+
+    <div class="schedule-time">
+      10:30 PM
+    </div>
+
+    <div class="schedule-name">
+      Dance & Celebration
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- DRESS CODE -->
+
+<section class="dress-code">
+
+  <h2>
+    Dress Code
+  </h2>
+
+  <p>
+    Come dressed in your most elegant
+    and comfortable formal attire
+    and celebrate this special evening with us.
+  </p>
+
+</section>
+
+
+<!-- MAP -->
+
+<iframe
+  class="map"
+  src="https://www.google.com/maps?q=Moment+Villa+Alexandria+Egypt&output=embed"
+  allowfullscreen="">
+</iframe>
+
+
+<!-- RSVP -->
+
+<section class="rsvp">
+
+  <h2>
+    RSVP
+  </h2>
+
+  <form
+    action="https://formspree.io/f/xaqjoblq"
+    method="POST">
+
+    <input
+      type="text"
+      name="name"
+      placeholder="Your name"
+      required>
+
+    <input
+      type="tel"
+      name="phone"
+      placeholder="Your number"
+      required>
+
+    <input
+      type="email"
+      name="email"
+      placeholder="Your email">
+
+    <select name="attendance">
+
+      <option value="yes">
+        Yes, I’ll be there
+      </option>
+
+      <option value="no">
+        Sorry, can’t make it
+      </option>
+
+    </select>
+
+    <button type="submit">
+      Send RSVP
+    </button>
+
+  </form>
+
+</section>
+
+
+<!-- GALLERY -->
+
+<section class="gallery">
+
+  <h2>
+    Our Story 📸
+  </h2>
+
+  <div class="photos">
+
+    <img src="https://images.unsplash.com/photo-1769703625036-49176eace254?q=80&w=435&auto=format&fit=crop">
+
+    <img src="https://images.unsplash.com/photo-1769703953941-ebb54f7efd3d?q=80&w=436&auto=format&fit=crop">
+
+    <img src="https://images.unsplash.com/photo-1769703953958-2d0b55af42cc?q=80&w=436&auto=format&fit=crop">
+
+  </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<section class="footer">
+
+  <p>
+    With love 🤍
+  </p>
+
+</section>
+
+
+<script>
+
+
+/* COUNTDOWN */
+
+const weddingDate =
+  new Date("November 7, 2026 20:00:00").getTime();
+
+
+function updateCountdown() {
+
+  const now =
+    new Date().getTime();
+
+  const distance =
+    weddingDate - now;
+
+
+  if (distance <= 0) {
+
+    document.getElementById("countdown").innerHTML =
+      "Today is the big day! ♡";
+
+    return;
+  }
+
+
+  const days =
+    Math.floor(
+      distance / (1000 * 60 * 60 * 24)
+    );
+
+
+  const hours =
+    Math.floor(
+      (distance / (1000 * 60 * 60)) % 24
+    );
+
+
+  const minutes =
+    Math.floor(
+      (distance / (1000 * 60)) % 60
+    );
+
+
+  const seconds =
+    Math.floor(
+      (distance / 1000) % 60
+    );
+
+
+  document.getElementById("countdown").innerHTML =
+    `${days} Days • ${hours} Hours • ${minutes} Minutes • ${seconds} Seconds`;
+
+}
+
+
+updateCountdown();
+
+setInterval(updateCountdown, 1000);
+
+
+
+/* LANGUAGE */
+
+function setLang(lang) {
+
+  const content = {
+
+    en: {
+      title: "Mohamed & Rahma",
+      date: "November 7, 2026 • 8:00 PM",
+      invite: "You are invited to celebrate our wedding"
+    },
+
+    fr: {
+      title: "Mohamed & Rahma",
+      date: "7 Novembre 2026 • 20:00",
+      invite: "Vous êtes invités à célébrer notre mariage"
+    },
+
+    ar: {
+      title: "محمد و رحمة",
+      date: "7 نوفمبر 2026 • الساعة 8 مساءً",
+      invite: "يسعدنا دعوتكم للاحتفال بزفافنا"
+    }
+
+  };
+
+
+  document.getElementById("title").innerText =
+    content[lang].title;
+
+  document.getElementById("date").innerText =
+    content[lang].date;
+
+  document.getElementById("invite").innerText =
+    content[lang].invite;
+
+
+  document.body.dir =
+    lang === "ar" ? "rtl" : "ltr";
+
+}
+
+</script>
+
+
+</body>
+</html>
