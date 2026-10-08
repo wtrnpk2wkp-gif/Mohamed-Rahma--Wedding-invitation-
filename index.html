@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wedding Invitation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="lang">
+  <button onclick="setLang('en')">EN</button>
+</div>
+  <section class="hero">
+    <h1 id="title">MOHAMED & RAHMA</h1>
+    <p class="date" id="date">NOVEMBER 7, 2026 -Bizerte</p>
+    <p class="subtitle" id="invite"> You are invited to celebrate our wedding</p>
+  </section>
+  <section class="music">
+  <h2>Our Song 🎶</h2>
+  <iframe 
+    style="border-radius:12px"
+    src="https://open.spotify.com/track/6qqrTXSdwiJaq8SO0X2lSe?si=nJ1IaXIpR1Gn1b4U4Tvhzg&utm_source=copy-link"
+    width="300" 
+    height="80" 
+    frameborder="0" 
+    allow="autoplay; clipboard-write; encrypted-media;">
+  </iframe>
+</section>
+<div id="countdown"></div>
+  <section class="details">
+    <h2>Wedding Details</h2>
+    <p><strong>Ceremony:</strong> 8:00 PM</p>
+    <p><strong>Reception:</strong> 9:00 PM</p>
+    <p><strong>Location:</strong> MOMENTS VILLA ZAG </p>
+  </section>
+<iframe 
+  src="https://maps.app.goo.gl/jJufynmMjx3kT4e58?g_st=ic"
+  width="100%" 
+  height="300" 
+  style="border:0; margin-top:20px;" 
+  allowfullscreen="">
+</iframe>
+    button>
+    </form>
+  </section>
+  
+  <section class="footer">
+    <p>With love 🤍</p>
+  </section>
+  
+ 
+
+</body>
+</html>
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: #36110c;
+  color: #36110c;
+  text-align: center;
+}
+
+.hero {
+  padding: 120px 20px;
+  background: 
+    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.2)),
+    url("https://ibb.co/VYyLXHHc");
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+.date {
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+.details, .rsvp {
+  padding: 60px 20px;
+}
+h2 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 30px;
+}
+form {
+  max-width: 320px;
+  margin: auto;
+}
+
+input, select, button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+button {
+  background: #36110c;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+const weddingDate = new Date("NOVEMBER 7, 2026 ").getTime();
+
+setInterval(() => {
+  const now = new Date().getTime();
+  const distance = weddingDate - now;
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((distance / (1000 * 60)) % 60);
+
+  document.getElementById("countdown").innerHTML =
+    `${days} days • ${hours} hours • ${minutes} minutes`;
+}, 1000);
+function setLang(lang) {
+  const content = {
+    en: {
+      title: "MOHAMED & RAHMA",
+      date: "NOVEMBER 7, 2026 • Bizerte",
+      invite: "You are invited to celebrate our wedding"
+    },
+mariage"
+    },
+  };
+
+  document.getElementById("title").innerText = content[lang].title;
+  document.getElementById("date").innerText = content[lang].date;
+  document.getElementById("invite").innerText = content[lang].invite;
+
+  document.body.dir = lang === "ar" ? "rtl" : "ltr";
+}
