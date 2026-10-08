@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوة زفاف رحمة ومحمد | Rahma & Mohamed</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-cream: #FAF7F2;
+            --card-bg: #FFFFFF;
+            --burgundy: #6B1D2F;
+            --burgundy-dark: #4A121F;
+            --burgundy-light: #8C2B42;
+            --gold: #D4AF37;
+            --gold-light: #F3E5AB;
+            --text-dark: #2C2C2C;
+            --text-muted: #666666;
+            --border-color: #E8DCCB;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            font-family: 'Cairo', serif;
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 12px;
+            background-image: 
+                radial-gradient(var(--border-color) 0.75px, transparent 0.75px),
+                radial-gradient(var(--border-color) 0.75px, var(--bg-cream) 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Ambient floating petals container */
+        #petal-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .petal {
+            position: absolute;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.4), rgba(107, 29, 47, 0.3));
+            border-radius: 15px 0 15px 0;
+            animation: animatePetal 10s linear infinite;
+        }
+
+        @keyframes animatePetal {
+            0% {
+                opacity: 0;
+                transform: translateY(-10vh) rotate(0deg) scale(0.5);
+            }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(720deg) scale(1.2);
+            }
+        }
+
+        /* Main Card Container */
+        .invitation-card {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 520px;
+            border-radius: 24px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 20px 50px rgba(107, 29, 47, 0.12), 0 5px 15px rgba(0,0,0,0.04);
+            border: 2px solid var(--gold);
+            padding: 40px 28px;
+            text-align: center;
+            margin: auto;
+            transition: all 0.3s ease;
+        }
+
+        /* Luxury Ornate Lace Frame Accent */
+        .card-inner-border {
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 18px;
+            padding: 24px 16px;
+            position: relative;
+        }
+
+        .corner-ornament {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            color: var(--gold);
+            font-size: 20px;
+            line-height: 32px;
+        }
+        .corner-tl { top: 6px; right: 8px; }
+        .corner-tr { top: 6px; left: 8px; }
+        .corner-bl { bottom: 6px; right: 8px; }
+        .corner-br { bottom: 6px; left: 8px; }
+
+        /* Typography Styles */
+        .bismillah {
+            font-family: 'Amiri', serif;
+            font-size: 1.25rem;
+            color: var(--burgundy);
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .welcoming-text {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .couple-names-en {
+            font-family: 'Alex Brush', cursive;
+            font-size: 3.5rem;
+            color: var(--burgundy);
+            margin: 10px 0;
+            line-height: 1.1;
+            text-shadow: 1px 1px 2px rgba(212, 175, 55, 0.2);
+            direction: ltr;
+        }
+
+        .couple-names-ar {
+            font-family: 'Amiri', serif;
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: var(--burgundy-dark);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 22px 0;
+            gap: 12px;
+        }
+
+        .divider-line {
+            height: 1px;
+            background: linear-gradient(to left, transparent, var(--gold), transparent);
+            flex: 1;
+        }
+
+        .divider-icon {
+            color: var(--gold);
+            font-size: 1.1rem;
+        }
+
+        /* Wedding Details */
+        .event-details-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            margin: 22px 0;
+        }
+
+        .detail-item {
+            background: var(--bg-cream);
+            padding: 14px 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-align: right;
+        }
+
+        .detail-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--burgundy);
+            color: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(107, 29, 47, 0.2);
+        }
+
+        .detail-text h4 {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .detail-text p {
+            font-size: 1.05rem;
+            color: var(--burgundy-dark);
+            font-weight: 700;
+        }
+
+        /* Countdown Timer */
+        .countdown-title {
+            font-size: 0.9rem;
+            color: var(--burgundy);
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .countdown-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            direction: ltr;
+            margin-bottom: 26px;
+        }
+
+        .timer-box {
+            background: linear-gradient(145deg, #ffffff, var(--bg-cream));
+            border: 1px solid var(--gold);
+            border-radius: 12px;
+            padding: 10px 4px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.03);
+        }
+
+        .timer-number {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--burgundy);
+            display: block;
+            line-height: 1.2;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .timer-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+            display: block;
+            font-weight: 600;
+        }
+
+        /* Action Buttons */
+        .btn-action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 14px 20px;
+            background: linear-gradient(135deg, var(--burgundy), var(--burgundy-dark));
+            color: #FFFFFF;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 700;
+            border: 1px solid var(--gold);
+            box-shadow: 0 6px 18px rgba(107, 29, 47, 0.25);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 12px;
+        }
+
+        .btn-action:hover, .btn-action:active {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(107, 29, 47, 0.35);
+            background: linear-gradient(135deg, var(--burgundy-light), var(--burgundy));
+        }
+
+        .btn-action i {
+            color: var(--gold);
+        }
+
+        /* RSVP Form Section */
+        .rsvp-section {
+            background: var(--bg-cream);
+            border: 1px dashed var(--gold);
+            border-radius: 16px;
+            padding: 20px 16px;
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .rsvp-title {
+            font-size: 1.05rem;
+            color: var(--burgundy);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+            background: #FFFFFF;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus, .form-select:focus {
+            border-color: var(--burgundy);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background: var(--gold);
+            color: var(--burgundy-dark);
+            border: none;
+            border-radius: 8px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 8px;
+        }
+
+        .btn-submit:hover {
+            background: #c29f2e;
+        }
+
+        .rsvp-status-msg {
+            display: none;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .rsvp-status-msg.success {
+            background: #E8F5E9;
+            color: #2E7D32;
+            border: 1px solid #A5D6A7;
+        }
+
+        /* Audio & Celebration Floating Bar */
+        .floating-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.92);
+            padding: 8px 16px;
+            border-radius: 30px;
+            border: 1px solid var(--gold);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            backdrop-filter: blur(8px);
+        }
+
+        .float-btn {
+            background: var(--burgundy);
+            color: var(--gold);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .float-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .invitation-card {
+                padding: 28px 18px;
+            }
+            .couple-names-en {
+                font-size: 2.8rem;
+            }
+            .couple-names-ar {
+                font-size: 1.8rem;
+            }
+            .timer-number {
+                font-size: 1.15rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Background Petals -->
+    <div id="petal-container"></div>
+
+    <main class="invitation-card">
+        <div class="card-inner-border">
+            <!-- Ornate Corners -->
+            <div class="corner-ornament corner-tl">❧</div>
+            <div class="corner-ornament corner-tr">❧</div>
+            <div class="corner-ornament corner-bl">❧</div>
+            <div class="corner-ornament corner-br">❧</div>
+
+            <!-- Bismillah Header -->
+            <p class="bismillah">بسم الله الرحمن الرحيم</p>
+
+            <!-- Welcoming Quote -->
+            <p class="welcoming-text">
+                "نُشهد الله على حبنا ونعدكم بليلة لا تُنسى"<br>
+                يسعدنا ويشرفنا حضوركم حفل زفافنا لمشاركتنا فرحتنا الكبرى
+            </p>
+
+            <!-- Names Section -->
+            <h1 class="couple-names-en">Rahma & Mohamed</h1>
+            <h2 class="couple-names-ar">رحمة & محمد</h2>
+
+            <div class="divider">
+                <div class="divider-line"></div>
+                <i class="fa-solid fa-heart divider-icon"></i>
+                <div class="divider-line"></div>
+            </div>
+
+            <!-- Event Details -->
+            <div class="event-details-grid">
+                <div class="detail-item">
+                    <div class="detail-icon">
+                        <i class="fa-regular fa-calendar-check"></i>
+                    </div>
+                    <div class="detail-text">
+                        <h4>التاريخ والتوقيت</h4>
+                        <p>السبت، ٧ نوفمبر ٢٠٢٦ - ٨:٠٠ مساءً</p>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="detail-icon">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <div class="detail-text">
+                        <h4>مكان الحفل</h4>
+                        <p>فيلا مومنتس - الزقازيق</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Countdown Timer -->
+            <div class="countdown-section">
+                <p class="countdown-title">✦ المتبقي على الليلة الموعودة ✦</p>
+                <div class="countdown-container">
+                    <div class="timer-box">
+                        <span class="timer-number" id="days">00</span>
+                        <span class="timer-label">أيام</span>
+                    </div>
+                    <div class="timer-box">
+                        <span class="timer-number" id="hours">00</span>
+                        <span class="timer-label">ساعة</span>
+                    </div>
+                    <div class="timer-box">
+                        <span class="timer-number" id="minutes">00</span>
+                        <span class="timer-label">دقيقة</span>
+                    </div>
+                    <div class="timer-box">
+                        <span class="timer-number" id="seconds">00</span>
+                        <span class="timer-label">ثانية</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Direct Location Button -->
+            <!-- Direct query search for Moments Villa in Zagazig on Google Maps -->
+            <a href="https://www.google.com/maps/search/?api=1&query=Moments+Villa+Zagazig+فيلا+مومنتس+الزقازيق" target="_blank" class="btn-action">
+                <i class="fa-solid fa-map-location-dot"></i>
+                موقع القاعة على الخريطة 📍
+            </a>
+
+            <!-- RSVP Form -->
+            <section class="rsvp-section">
+                <h3 class="rsvp-title">
+                    <i class="fa-regular fa-envelope-open"></i>
+                    تأكيد الحضور
+                </h3>
+                
+                <form id="rsvpForm" onsubmit="handleRSVP(event)">
+                    <div class="form-group">
+                        <label class="form-label" for="guestName">الاسم الكريم:</label>
+                        <input type="text" id="guestName" class="form-input" placeholder="اكتب اسمك هنا..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="attendanceStatus">حالة الحضور:</label>
+                        <select id="attendanceStatus" class="form-select" required onchange="toggleCompanions(this.value)">
+                            <option value="حضور">يشرفني الحضور ✨</option>
+                            <option value="اعتذار">أعتذر عن الحضور 🤍</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="companionsGroup">
+                        <label class="form-label" for="guestCount">عدد المرافقين:</label>
+                        <select id="guestCount" class="form-select">
+                            <option value="1">بدون مرافقين (أنا فقط)</option>
+                            <option value="2">مرافق واحد (+1)</option>
+                            <option value="3">مرافقان (+2)</option>
+                            <option value="4">أكثر من ذلك</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-submit">تأكيد الإجابة</button>
+                </form>
+
+                <div id="rsvpStatusMsg" class="rsvp-status-msg"></div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Floating Audio Control & Sparkle Buttons -->
+    <div class="floating-controls">
+        <button class="float-btn" onclick="triggerConfetti()" title="احتفال">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </button>
+        <button class="float-btn" id="audioBtn" onclick="toggleAudio()" title="تشغيل الموسيقى">
+            <i class="fa-solid fa-music"></i>
+        </button>
+    </div>
+
+    <!-- Soft Audio Element (Royalty Free Gentle Background Ambient Instrument) -->
+    <audio id="bgAudio" loop preload="auto">
+        <source src="https://assets.mixkit.co/music/preview/mixkit-wedding-march-long-version-688.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // 1. Countdown Timer Logic
+        const weddingDate = new Date("November 7, 2026 20:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance < 0) {
+                document.getElementById("days").innerText = "00";
+                document.getElementById("hours").innerText = "00";
+                document.getElementById("minutes").innerText = "00";
+                document.getElementById("seconds").innerText = "00";
+                document.querySelector(".countdown-title").innerText = "مبارك للعروسين! انقضت الليلة الموعودة ✨";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // 2. RSVP Form Logic & Local Storage
+        function toggleCompanions(status) {
+            const companionsGroup = document.getElementById("companionsGroup");
+            if (status === "اعتذار") {
+                companionsGroup.style.display = "none";
+            } else {
+                companionsGroup.style.display = "block";
+            }
+        }
+
+        function handleRSVP(event) {
+            event.preventDefault();
+            const name = document.getElementById("guestName").value.trim();
+            const status = document.getElementById("attendanceStatus").value;
+            const count = document.getElementById("guestCount").value;
+
+            if (!name) return;
+
+            const rsvpData = { name, status, count, date: new Date().toISOString() };
+            localStorage.setItem("wedding_rsvp_" + name, JSON.stringify(rsvpData));
+
+            const msgElement = document.getElementById("rsvpStatusMsg");
+            msgElement.className = "rsvp-status-msg success";
+            msgElement.style.display = "block";
+
+            if (status === "حضور") {
+                msgElement.innerHTML = `شكراً لك أ/ <b>${name}</b>! تم تسجيل حضورك بنجاح. ننتظرك بكل حب ✨`;
+                triggerConfetti();
+            } else {
+                msgElement.innerHTML = `شكراً لك أ/ <b>${name}</b>. نتمنى أن نراك في مناسبات قادمة على خير 🤍`;
+            }
+
+            document.getElementById("rsvpForm").reset();
+            toggleCompanions("حضور");
+        }
+
+        // Check if user already responded previously
+        window.addEventListener('DOMContentLoaded', () => {
+            createPetals();
+            // Trigger light initial confetti
+            setTimeout(() => {
+                triggerConfetti();
+            }, 1000);
+        });
+
+        // 3. Audio Player Controls
+        const audio = document.getElementById("bgAudio");
+        const audioBtn = document.getElementById("audioBtn");
+        let isPlaying = false;
+
+        function toggleAudio() {
+            if (isPlaying) {
+                audio.pause();
+                audioBtn.innerHTML = '<i class="fa-solid fa-music"></i>';
+                audioBtn.style.background = 'var(--burgundy)';
+            } else {
+                audio.play().then(() => {
+                    audioBtn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+                    audioBtn.style.background = 'var(--gold)';
+                    audioBtn.style.color = 'var(--burgundy-dark)';
+                }).catch(err => {
+                    console.log("Audio autoplay prevented by browser.");
+                });
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // 4. Celebration Confetti Effect
+        function triggerConfetti() {
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 60,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#D4AF37', '#6B1D2F', '#FAF7F2', '#E8DCCB']
+                });
+            }
+        }
+
+        // 5. Floating Gold/Rose Petals Background
+        function createPetals() {
+            const container = document.getElementById("petal-container");
+            const petalCount = 12;
+
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement("div");
+                petal.className = "petal";
+                
+                const size = Math.random() * 15 + 10;
+                petal.style.width = `${size}px`;
+                petal.style.height = `${size}px`;
+                petal.style.left = `${Math.random() * 100}%`;
+                petal.style.animationDelay = `${Math.random() * 8}s`;
+                petal.style.animationDuration = `${Math.random() * 6 + 8}s`;
+
+                container.appendChild(petal);
+            }
+        }
+    </script>
+</body>
+</html>
