@@ -1,0 +1,1674 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mohamed & Rahma | Wedding Invitation</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+
+    :root {
+
+      --burgundy: #4B1020;
+
+      --burgundy-dark: #300711;
+
+      --burgundy-light: #300711;
+
+      --cream: #F5E9D5;
+
+      --cream-dark: #E8D4B5;
+
+      --gold: #C5A46D;
+
+      --gold-light: #E2C99B;
+
+    }
+
+    * {
+
+      box-sizing: border-box;
+
+      margin: 0;
+
+      padding: 0;
+
+    }
+
+    html {
+
+      scroll-behavior: smooth;
+
+    }
+
+    body {
+
+      background: var(--burgundy);
+
+      color: var(--cream);
+
+      font-family: 'Cormorant Garamond', serif;
+
+      overflow-x: hidden;
+
+    }
+
+    button, a {
+
+      -webkit-tap-highlight-color: transparent;
+
+    }
+
+    button {
+
+      font: inherit;
+
+    }
+
+    .page {
+
+      width: 100%;
+
+      overflow: hidden;
+
+      background:
+
+        radial-gradient(ellipse at top, rgba(119, 34, 53, .22), transparent 55%),
+
+        var(--burgundy);
+
+    }
+
+    .gold {
+
+      color: var(--gold);
+
+    }
+
+    .eyebrow {
+
+      font-family: 'Montserrat', sans-serif;
+
+      font-size: 10px;
+
+      letter-spacing: 5px;
+
+      line-height: 2;
+
+      text-transform: uppercase;
+
+      color: var(--cream-dark);
+
+    }
+
+    .script {
+
+      font-family: 'Great Vibes', cursive;
+
+      font-weight: 400;
+
+      color: var(--gold-light);
+
+    }
+
+    .ornament {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 14px;
+
+      margin: 25px auto;
+
+      color: var(--gold);
+
+    }
+
+    .ornament::before,
+
+    .ornament::after {
+
+      content: "";
+
+      width: 75px;
+
+      height: 1px;
+
+      background: var(--gold);
+
+      opacity: .8;
+
+    }
+
+    .ornament span {
+
+      font-size: 17px;
+
+    }
+
+    /* Opening screen */
+
+    .opening {
+
+      min-height: 100svh;
+
+      padding: 65px 20px 45px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: center;
+
+      text-align: center;
+
+      position: relative;
+
+      border-bottom: 1px solid rgba(197, 164, 109, .3);
+
+      isolation: isolate;
+
+    }
+
+    .opening::before,
+
+    .opening::after {
+
+      content: "❧";
+
+      position: absolute;
+
+      z-index: -1;
+
+      color: var(--gold);
+
+      opacity: .17;
+
+      font-size: clamp(100px, 25vw, 230px);
+
+      pointer-events: none;
+
+    }
+
+    .opening::before {
+
+      top: 10px;
+
+      left: -40px;
+
+      transform: rotate(-35deg);
+
+    }
+
+    .opening::after {
+
+      right: -40px;
+
+      bottom: 5px;
+
+      transform: rotate(145deg);
+
+    }
+
+    .top-label {
+
+      margin-bottom: 15px;
+
+    }
+
+    .opening h1 {
+
+      font-size: clamp(35px, 8vw, 70px);
+
+      font-weight: 400;
+
+      line-height: 1.1;
+
+      color: var(--cream);
+
+    }
+
+    .opening h1 span {
+
+      color: var(--gold);
+
+      font-style: italic;
+
+    }
+
+    .opening-subtitle {
+
+      margin-top: 14px;
+
+    }
+
+    .envelope-area {
+
+      width: min(100%, 390px);
+
+      margin: 50px auto 25px;
+
+      perspective: 1000px;
+
+    }
+
+    .envelope-button {
+
+      width: 100%;
+
+      display: block;
+
+      border: 0;
+
+      background: transparent;
+
+      cursor: pointer;
+
+      color: inherit;
+
+      text-align: center;
+
+    }
+
+    .envelope {
+
+      width: 100%;
+
+      aspect-ratio: 1.5 / 1;
+
+      position: relative;
+
+      background: linear-gradient(145deg, #F8EBD5, #D9BE94);
+
+      border-radius: 5px;
+
+      box-shadow: 0 22px 45px rgba(0, 0, 0, .32);
+
+      overflow: hidden;
+
+      transform-style: preserve-3d;
+
+    }
+
+    .envelope::before,
+
+    .envelope::after {
+
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      pointer-events: none;
+
+    }
+
+    .envelope::before {
+
+      background: linear-gradient(35deg, transparent 49.5%, rgba(117, 75, 47, .2) 50%, transparent 50.5%),
+
+                  linear-gradient(-35deg, transparent 49.5%, rgba(117, 75, 47, .17) 50%, transparent 50.5%);
+
+      z-index: 1;
+
+    }
+
+    .envelope-flap {
+
+      position: absolute;
+
+      z-index: 3;
+
+      top: 0;
+
+      left: 0;
+
+      width: 100%;
+
+      height: 57%;
+
+      background: linear-gradient(155deg, #FFF2DF, #E8D1AC);
+
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+
+      transform-origin: top center;
+
+      transition: transform .9s ease, opacity .7s ease;
+
+      filter: drop-shadow(0 3px 3px rgba(50, 15, 10, .12));
+
+    }
+
+    .envelope-paper {
+
+      position: absolute;
+
+      z-index: 2;
+
+      top: 8%;
+
+      left: 8%;
+
+      width: 84%;
+
+      height: 82%;
+
+      background: #FFF9ED;
+
+      color: var(--burgundy);
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: center;
+
+      align-items: center;
+
+      transition: transform .9s ease;
+
+    }
+
+    .envelope-paper small {
+
+      font-family: 'Montserrat', sans-serif;
+
+      letter-spacing: 3px;
+
+      font-size: 8px;
+
+    }
+
+    .envelope-paper strong {
+
+      font-size: 30px;
+
+      font-weight: 400;
+
+      margin-top: 5px;
+
+    }
+
+    .wax-seal {
+
+      position: absolute;
+
+      z-index: 4;
+
+      left: 50%;
+
+      top: 48%;
+
+      transform: translate(-50%, -50%);
+
+      width: 76px;
+
+      height: 76px;
+
+      border-radius: 50%;
+
+      background: radial-gradient(circle at 35% 30%, #8C293A, #4B1020 70%);
+
+      border: 2px solid #9E4A4C;
+
+      box-shadow: 0 4px 9px rgba(0, 0, 0, .3), inset 0 0 0 3px rgba(220, 170, 128, .16);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      color: var(--gold-light);
+
+      font-family: 'Great Vibes', cursive;
+
+      font-size: 25px;
+
+      transition: opacity .5s ease, transform .5s ease;
+
+    }
+
+    .open-hint {
+
+      display: block;
+
+      margin-top: 23px;
+
+      color: var(--gold-light);
+
+      font-family: 'Montserrat', sans-serif;
+
+      letter-spacing: 4px;
+
+      font-size: 10px;
+
+      text-transform: uppercase;
+
+    }
+
+    .down-arrow {
+
+      margin-top: 17px;
+
+      color: var(--gold);
+
+      font-size: 25px;
+
+      animation: float 1.7s ease-in-out infinite;
+
+    }
+
+    @keyframes float {
+
+      0%, 100% { transform: translateY(0); }
+
+      50% { transform: translateY(7px); }
+
+    }
+
+    .opening.opened .envelope-flap {
+
+      transform: rotateX(180deg);
+
+      opacity: .3;
+
+    }
+
+    .opening.opened .wax-seal {
+
+      opacity: 0;
+
+      transform: translate(-50%, -50%) scale(.5);
+
+    }
+
+    .opening.opened .envelope-paper {
+
+      transform: translateY(-12%);
+
+    }
+
+    .opening.opened .open-hint {
+
+      color: var(--cream);
+
+    }
+
+    /* Main invitation */
+
+    .invitation {
+
+      display: none;
+
+      opacity: 0;
+
+    }
+
+    .invitation.visible {
+
+      display: block;
+
+      animation: revealPage 1.1s ease forwards;
+
+    }
+
+    @keyframes revealPage {
+
+      to { opacity: 1; }
+
+    }
+
+    .section {
+
+      padding: 75px 22px;
+
+      text-align: center;
+
+      border-bottom: 1px solid rgba(197, 164, 109, .22);
+
+      background: var(--burgundy);
+
+    }
+
+    .hero-card {
+
+      width: min(100%, 820px);
+
+      margin: 0 auto;
+
+      border: 1px solid var(--gold);
+
+      padding: 42px 20px 35px;
+
+      position: relative;
+
+    }
+
+    .hero-card::before,
+
+    .hero-card::after {
+
+      content: "❧";
+
+      position: absolute;
+
+      color: var(--gold);
+
+      font-size: 24px;
+
+      background: var(--burgundy);
+
+      padding: 0 5px;
+
+    }
+
+    .hero-card::before {
+
+      top: -14px;
+
+      left: 9px;
+
+    }
+
+    .hero-card::after {
+
+      bottom: -14px;
+
+      right: 9px;
+
+      transform: rotate(180deg);
+
+    }
+
+    .hero-card .couple-names {
+
+      font-size: clamp(56px, 12vw, 95px);
+
+      line-height: 1.05;
+
+      margin: 16px 0 5px;
+
+    }
+
+    .hero-card .amp {
+
+      font-family: 'Great Vibes', cursive;
+
+      font-size: 44px;
+
+      color: var(--gold);
+
+      line-height: 1;
+
+    }
+
+    .intro {
+
+      max-width: 540px;
+
+      margin: 18px auto 30px;
+
+      font-size: 19px;
+
+      line-height: 1.8;
+
+      color: var(--cream);
+
+    }
+
+    .date-label {
+
+      font-family: 'Montserrat', sans-serif;
+
+      letter-spacing: 4px;
+
+      font-size: 10px;
+
+      color: var(--cream-dark);
+
+      margin-bottom: 12px;
+
+    }
+
+    .date-row {
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      gap: 22px;
+
+      margin: 15px auto 25px;
+
+    }
+
+    .date-side {
+
+      font-family: 'Montserrat', sans-serif;
+
+      font-size: 10px;
+
+      letter-spacing: 2px;
+
+      line-height: 2;
+
+      color: var(--cream);
+
+    }
+
+    .date-number {
+
+      padding: 0 23px;
+
+      border-left: 1px solid var(--gold);
+
+      border-right: 1px solid var(--gold);
+
+      font-size: clamp(65px, 13vw, 86px);
+
+      line-height: 1;
+
+      color: var(--cream);
+
+    }
+
+    .time-note {
+
+      font-family: 'Montserrat', sans-serif;
+
+      font-size: 10px;
+
+      letter-spacing: 3px;
+
+      line-height: 2;
+
+      color: var(--cream-dark);
+
+    }
+
+    /* Countdown */
+
+    .countdown-section {
+
+      padding: 50px 15px 60px;
+
+      background: var(--burgundy-dark);
+
+      text-align: center;
+
+      border-bottom: 1px solid rgba(197, 164, 109, .3);
+
+    }
+
+    .countdown-title {
+
+      font-size: clamp(35px, 7vw, 48px);
+
+      font-weight: 400;
+
+      margin-bottom: 30px;
+
+    }
+
+    .countdown {
+
+      display: flex;
+
+      justify-content: center;
+
+      gap: clamp(12px, 4vw, 35px);
+
+      flex-wrap: wrap;
+
+    }
+
+    .count-item {
+
+      min-width: 60px;
+
+      padding: 0 13px;
+
+      border-right: 1px solid rgba(197, 164, 109, .7);
+
+    }
+
+    .count-item:last-child {
+
+      border-right: 0;
+
+    }
+
+    .count-number {
+
+      font-size: clamp(35px, 7vw, 49px);
+
+      font-style: italic;
+
+      line-height: 1.2;
+
+      color: var(--cream);
+
+    }
+
+    .count-label {
+
+      margin-top: 6px;
+
+      font-family: 'Montserrat', sans-serif;
+
+      font-size: 9px;
+
+      letter-spacing: 2px;
+
+      color: var(--gold-light);
+
+    }
+
+    /* Venue and timeline */
+
+    .details-grid {
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 45px;
+
+      max-width: 950px;
+
+      margin: 0 auto;
+
+      text-align: left;
+
+    }
+
+    .detail-column {
+
+      padding: 5px 10px;
+
+    }
+
+    .detail-column + .detail-column {
+
+      border-left: 1px solid rgba(197, 164, 109, .35);
+
+      padding-left: 38px;
+
+    }
+
+    .detail-heading {
+
+      font-size: clamp(34px, 5vw, 45px);
+
+      line-height: 1.2;
+
+      margin: 8px 0 15px;
+
+    }
+
+    .venue-name {
+
+      font-size: 26px;
+
+      color: var(--cream);
+
+      margin-bottom: 8px;
+
+    }
+
+    .body-copy {
+
+      color: var(--cream-dark);
+
+      font-size: 18px;
+
+      line-height: 1.65;
+
+    }
+
+    .location-line {
+
+      margin: 20px 0;
+
+      color: var(--gold-light);
+
+      font-size: 17px;
+
+    }
+
+    .outline-button {
+
+      display: inline-block;
+
+      border: 1px solid var(--gold);
+
+      padding: 13px 20px;
+
+      color: var(--cream);
+
+      text-decoration: none;
+
+      font-family: 'Montserrat', sans-serif;
+
+      font-size: 9px;
+
+      letter-spacing: 2px;
+
+      text-transform: uppercase;
+
+      transition: background .25s, color .25s;
+
+    }
+
+    .outline-button:hover {
+
+      background: var(--cream);
+
+      color: var(--burgundy);
+
+    }
+
+    .timeline {
+
+      margin-top: 20px;
+
+    }
+
+    .timeline-item {
+
+      display: grid;
+
+      grid-template-columns: 78px 14px 1fr;
+
+      gap: 12px;
+
+      position: relative;
+
+      padding-bottom: 25px;
+
+    }
+
+    .timeline-item:not(:last-child)::after {
+
+      content: "";
+
+      position: absolute;
+
+      top: 15px;
+
+      bottom: -1px;
+
+      left: 84px;
+
+      width: 1px;
+
+      background: rgba(197, 164, 109, .6);
+
+    }
+
+    .timeline-time {
+
+      font-family: 'Montserrat', sans-serif;
+
+      font-size: 10px;
+
+      letter-spacing: 1px;
+
+      color: var(--gold-light);
+
+      padding-top: 2px;
+
+    }
+
+    .timeline-dot {
+
+      width: 9px;
+
+      height: 9px;
+
+      border-radius: 50%;
+
+      background: var(--gold);
+
+      margin-top: 4px;
+
+      position: relative;
+
+      z-index: 1;
+
+    }
+
+    .timeline-text h4 {
+
+      font-size: 19px;
+
+      font-weight: 500;
+
+      color: var(--cream);
+
+    }
+
+    .timeline-text p {
+
+      font-size: 15px;
+
+      color: var(--cream-dark);
+
+      margin-top: 3px;
+
+      line-height: 1.4;
+
+    }
+
+    /* Dress code */
+
+    .dress-section {
+
+      padding: 48px 20px;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      gap: clamp(20px, 5vw, 60px);
+
+      flex-wrap: wrap;
+
+      text-align: center;
+
+      background: var(--burgundy-dark);
+
+    }
+
+    .dress-icon {
+
+      font-size: 40px;
+
+      color: var(--gold);
+
+    }
+
+    .dress-section h2 {
+
+      font-size: 38px;
+
+      font-weight: 400;
+
+      margin-bottom: 8px;
+
+    }
+
+    .dress-section p {
+
+      color: var(--cream-dark);
+
+      font-size: 17px;
+
+      line-height: 1.5;
+
+    }
+
+    .footer {
+
+      padding: 50px 20px 55px;
+
+      text-align: center;
+
+      position: relative;
+
+      background: var(--burgundy);
+
+    }
+
+    .footer .script {
+
+      font-size: clamp(35px, 7vw, 49px);
+
+      margin: 10px 0;
+
+    }
+
+    .footer .eyebrow {
+
+      font-size: 9px;
+
+      letter-spacing: 3px;
+
+    }
+
+    .footer-heart {
+
+      color: var(--gold);
+
+      margin-top: 18px;
+
+    }
+
+    .reveal {
+
+      opacity: 0;
+
+      transform: translateY(18px);
+
+      transition: opacity .8s ease, transform .8s ease;
+
+    }
+
+    .reveal.show {
+
+      opacity: 1;
+
+      transform: translateY(0);
+
+    }
+
+    @media (max-width: 650px) {
+
+      .opening {
+
+        padding-top: 55px;
+
+        padding-bottom: 35px;
+
+      }
+
+      .envelope-area {
+
+        width: min(88%, 350px);
+
+        margin-top: 42px;
+
+      }
+
+      .section {
+
+        padding: 55px 18px;
+
+      }
+
+      .hero-card {
+
+        padding: 35px 13px 30px;
+
+      }
+
+      .intro {
+
+        font-size: 17px;
+
+      }
+
+      .date-row {
+
+        gap: 12px;
+
+      }
+
+      .date-side {
+
+        font-size: 8px;
+
+        letter-spacing: 1px;
+
+      }
+
+      .date-number {
+
+        padding: 0 15px;
+
+      }
+
+      .details-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 40px;
+
+      }
+
+      .detail-column {
+
+        padding: 0 5px;
+
+      }
+
+      .detail-column + .detail-column {
+
+        border-left: 0;
+
+        border-top: 1px solid rgba(197, 164, 109, .35);
+
+        padding: 35px 5px 0;
+
+      }
+
+      .timeline-item {
+
+        grid-template-columns: 68px 12px 1fr;
+
+        gap: 9px;
+
+      }
+
+      .timeline-item:not(:last-child)::after {
+
+        left: 72px;
+
+      }
+
+      .timeline-time {
+
+        font-size: 9px;
+
+      }
+
+      .timeline-text h4 {
+
+        font-size: 18px;
+
+      }
+
+      .count-item {
+
+        min-width: 55px;
+
+        padding: 0 8px;
+
+      }
+
+      .eyebrow {
+
+        letter-spacing: 3px;
+
+      }
+
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *, *::before, *::after {
+
+        scroll-behavior: auto !important;
+
+        animation-duration: .01ms !important;
+
+        transition-duration: .01ms !important;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <main class="page">
+
+    <!-- ENVELOPE / OPENING SCREEN -->
+
+    <section class="opening" id="opening">
+
+      <p class="eyebrow top-label">A Special Invitation</p>
+
+      <h1>Mohamed <span>&</span> Rahma</h1>
+
+      <p class="eyebrow opening-subtitle">Our Wedding Day</p>
+
+      <div class="envelope-area">
+
+        <button class="envelope-button" id="openButton" aria-label="Open the wedding invitation">
+
+          <div class="envelope">
+
+            <div class="envelope-paper">
+
+              <small>YOU ARE INVITED TO</small>
+
+              <strong>Our Wedding</strong>
+
+            </div>
+
+            <div class="envelope-flap"></div>
+
+            <div class="wax-seal">M <span style="font-size:15px">&</span> R</div>
+
+          </div>
+
+          <span class="open-hint" id="openHint">Tap to Open</span>
+
+          <span class="down-arrow" aria-hidden="true">⌄</span>
+
+        </button>
+
+      </div>
+
+    </section>
+
+    <!-- INVITATION CONTENT -->
+
+    <div class="invitation" id="invitation">
+
+      <!-- MAIN INVITATION -->
+
+      <section class="section">
+
+        <div class="hero-card reveal">
+
+          <p class="eyebrow">Together With Our Families</p>
+
+          <h2 class="script couple-names">
+
+            Mohamed
+
+            <span class="amp">&</span>
+
+            Rahma
+
+          </h2>
+
+          <p class="intro">
+
+            Joyfully invite you to celebrate
+
+            the beginning of our forever.
+
+          </p>
+
+          <p class="date-label">Saturday</p>
+
+          <div class="date-row">
+
+            <div class="date-side">
+
+              A DAY<br>TO REMEMBER
+
+            </div>
+
+            <div class="date-number">07</div>
+
+            <div class="date-side">
+
+              NOVEMBER<br>2026
+
+            </div>
+
+          </div>
+
+          <p class="time-note">AT EIGHT O'CLOCK IN THE EVENING</p>
+
+          <div class="ornament"><span>♥</span></div>
+
+          <p class="eyebrow">Scroll to Discover More</p>
+
+        </div>
+
+      </section>
+
+      <!-- COUNTDOWN -->
+
+      <section class="countdown-section reveal">
+
+        <h2 class="script countdown-title">Countdown to Forever</h2>
+
+        <div class="countdown">
+
+          <div class="count-item">
+
+            <div class="count-number" id="days">00</div>
+
+            <div class="count-label">DAYS</div>
+
+          </div>
+
+          <div class="count-item">
+
+            <div class="count-number" id="hours">00</div>
+
+            <div class="count-label">HOURS</div>
+
+          </div>
+
+          <div class="count-item">
+
+            <div class="count-number" id="minutes">00</div>
+
+            <div class="count-label">MINUTES</div>
+
+          </div>
+
+          <div class="count-item">
+
+            <div class="count-number" id="seconds">00</div>
+
+            <div class="count-label">SECONDS</div>
+
+          </div>
+
+        </div>
+
+        <p class="body-copy" id="countdownMessage" style="margin-top:22px"></p>
+
+      </section>
+
+      <!-- VENUE AND TIMELINE -->
+
+      <section class="section">
+
+        <div class="details-grid">
+
+          <div class="detail-column reveal">
+
+            <p class="eyebrow">The Celebration</p>
+
+            <h2 class="script detail-heading">Meet Us Here</h2>
+
+            <h3 class="venue-name">Moment Villa</h3>
+
+            <p class="body-copy">
+
+              Join us for an evening filled with love,
+
+              laughter, music, and beautiful memories.
+
+            </p>
+
+            <p class="location-line">⌖ &nbsp; Alexandria, Egypt</p>
+
+            <a
+
+              class="outline-button"
+
+              href="https://maps.app.goo.gl/ahJiRK1WFAet9Yvh7?g_st=ic"
+
+              target="_blank"
+
+              rel="noopener noreferrer"
+
+            >
+
+              View Location &nbsp; →
+
+            </a>
+
+          </div>
+
+          <div class="detail-column reveal">
+
+            <p class="eyebrow">The Evening Unfolds</p>
+
+            <h2 class="script detail-heading">Our Wedding Timeline</h2>
+
+            <div class="timeline">
+
+              <div class="timeline-item">
+
+                <div class="timeline-time">08:00 PM</div>
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-text">
+
+                  <h4>Welcome & Arrival</h4>
+
+                  <p>Let the celebration begin.</p>
+
+                </div>
+
+              </div>
+
+              <div class="timeline-item">
+
+                <div class="timeline-time">08:30 PM</div>
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-text">
+
+                  <h4>Dance & Celebrate</h4>
+
+                  <p>Good music, happy hearts.</p>
+
+                </div>
+
+              </div>
+
+              <div class="timeline-item">
+
+                <div class="timeline-time">09:30 PM</div>
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-text">
+
+                  <h4>Wedding Dinner</h4>
+
+                  <p>A delicious moment together.</p>
+
+                </div>
+
+              </div>
+
+              <div class="timeline-item">
+
+                <div class="timeline-time">10:30 PM</div>
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-text">
+
+                  <h4>One More Dance</h4>
+
+                  <p>Let's make the night unforgettable.</p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- DRESS CODE -->
+
+      <section class="dress-section reveal">
+
+        <div class="dress-icon" aria-hidden="true">♧</div>
+
+        <div>
+
+          <h2 class="script">Dress Code</h2>
+
+          <p>
+
+            Dress to feel your best and celebrate in style.<br>
+
+            We can't wait to see you!
+
+          </p>
+
+        </div>
+
+        <div class="dress-icon" aria-hidden="true">✧</div>
+
+      </section>
+
+      <!-- FOOTER -->
+
+      <footer class="footer reveal">
+
+        <p class="eyebrow">The Beginning of Forever</p>
+
+        <p class="script">Mohamed & Rahma</p>
+
+        <p class="eyebrow">
+
+          Thank You for Being Part of Our Story
+
+        </p>
+
+        <div class="ornament"><span>♥</span></div>
+
+      </footer>
+
+    </div>
+
+  </main>
+
+  <script>
+
+    const opening = document.getElementById("opening");
+
+    const invitation = document.getElementById("invitation");
+
+    const openButton = document.getElementById("openButton");
+
+    const openHint = document.getElementById("openHint");
+
+    let invitationOpened = false;
+
+    openButton.addEventListener("click", function () {
+
+      if (invitationOpened) return;
+
+      invitationOpened = true;
+
+      opening.classList.add("opened");
+
+      openHint.textContent = "Your Invitation";
+
+      setTimeout(function () {
+
+        invitation.classList.add("visible");
+
+        setTimeout(function () {
+
+          invitation.scrollIntoView({
+
+            behavior: "smooth",
+
+            block: "start"
+
+          });
+
+        }, 150);
+
+        revealObserver.observe(document.body);
+
+      }, 650);
+
+    });
+
+    // Countdown to November 7, 2026 at 8:00 PM Egypt time.
+
+    const weddingDate = new Date("2026-11-07T20:00:00+02:00").getTime();
+
+    function updateCountdown() {
+
+      const now = Date.now();
+
+      const difference = weddingDate - now;
+
+      const message = document.getElementById("countdownMessage");
+
+      if (difference <= 0) {
+
+        document.getElementById("days").textContent = "00";
+
+        document.getElementById("hours").textContent = "00";
+
+        document.getElementById("minutes").textContent = "00";
+
+        document.getElementById("seconds").textContent = "00";
+
+        message.textContent = "Today is the beginning of forever.";
+
+        return;
+
+      }
+
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+
+      const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+
+      const minutes = Math.floor((difference / (1000 * 60)) % 60);
+
+      const seconds = Math.floor((difference / 1000) % 60);
+
+      document.getElementById("days").textContent = String(days).padStart(2, "0");
+
+      document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+
+      message.textContent = "Every second brings us closer to our special day.";
+
+    }
+
+    updateCountdown();
+
+    setInterval(updateCountdown, 1000);
+
+    // Reveal sections gently as they enter the screen.
+
+    const revealObserver = new IntersectionObserver(function (entries) {
+
+      entries.forEach(function (entry) {
+
+        if (entry.isIntersecting) {
+
+          entry.target.classList.add("show");
+
+        }
+
+      });
+
+    }, {
+
+      threshold: 0.12
+
+    });
+
+    document.querySelectorAll(".reveal").forEach(function (element) {
+
+      revealObserver.observe(element);
+
+    });
+
+  </script>
+
+</body>
+
+</html>
