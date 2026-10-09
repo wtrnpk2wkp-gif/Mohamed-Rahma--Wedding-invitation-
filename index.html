@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Mohamed & Rahma | Wedding Invitation</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons & Canvas Confetti -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            burgundy: {
+              950: '#100204',
+              900: '#230408',
+              800: '#3D0911',
+              700: '#5A0D18',
+              600: '#7A1322',
+              500: '#9B1B2D',
+            },
+            champagne: {
+              100: '#FFFDF9',
+              200: '#F9F4EB',
+              300: '#EFE3CE',
+              400: '#E1CFB0',
+              500: '#D2B88B',
+            },
+            gold: {
+              100: '#FFF9E6',
+              200: '#FDE699',
+              300: '#F7D66B',
+              400: '#E9C343',
+              500: '#D4AF37',
+              600: '#B38F23',
+              700: '#8A6A12',
+            }
+          },
+          fontFamily: {
+            cinzel: ['Cinzel', 'serif'],
+            playfair: ['Playfair Display', 'serif'],
+            vibes: ['Great Vibes', 'cursive'],
+            sans: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --gold-gradient: linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%);
+    }
+
+    body {
+      background-color: #100204;
+      color: #F9F4EB;
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+      touch-action: manipulation;
+    }
+
+    .font-gold-foil {
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Floating Sparkles Canvas */
+    #sparklesCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* Envelope Interactive Styles */
+    .envelope-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 360px;
+      height: 480px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .envelope-body {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, #3D0911 0%, #230408 60%, #100204 100%);
+      border-radius: 16px;
+      border: 1.5px solid rgba(212, 175, 55, 0.4);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 30px rgba(122, 19, 34, 0.5);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Envelope Top Flap Animation */
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 220px;
+      background: linear-gradient(180deg, #4A0B14 0%, #29050A 100%);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transform-origin: top;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 30;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .envelope-wrapper.open .envelope-flap {
+      transform: rotateX(180deg);
+      z-index: 5;
+    }
+
+    /* Inner Card Sliding Up Animation */
+    .envelope-card {
+      position: absolute;
+      bottom: 20px;
+      width: 88%;
+      height: 380px;
+      background: #FAF6EE;
+      color: #230408;
+      border-radius: 12px;
+      border: 2px solid #D4AF37;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      transition: transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .envelope-wrapper.open .envelope-card {
+      transform: translateY(-120px) scale(1.05);
+    }
+
+    /* Heart Wax Seal Button */
+    .wax-seal-btn {
+      position: absolute;
+      top: 200px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 76px;
+      height: 76px;
+      background: radial-gradient(circle, #D4AF37 0%, #B38F23 60%, #7A590A 100%);
+      border-radius: 50%;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.8), inset 0 2px 4px rgba(255,255,255,0.6), 0 0 15px rgba(212,175,55,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 40;
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+
+    .wax-seal-btn:hover {
+      transform: translate(-50%, -50%) scale(1.1);
+      box-shadow: 0 12px 25px rgba(212,175,55,0.8);
+    }
+
+    .envelope-wrapper.open .wax-seal-btn {
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, -50%) scale(0.5);
+    }
+
+    /* Golden Arch Photo Frame */
+    .arch-photo-container {
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+      border-radius: 180px 180px 16px 16px;
+      padding: 6px;
+      background: linear-gradient(145deg, #D4AF37 0%, #8A6A12 35%, #FEF1B5 65%, #B38F23 100%);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 25px rgba(212, 175, 55, 0.3);
+    }
+
+    .arch-photo-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 174px 174px 12px 12px;
+      overflow: hidden;
+      background-color: #100204;
+      display: block;
+    }
+
+    /* Backdrop Glass Card */
+    .glass-card {
+      background: rgba(35, 4, 8, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+    }
+  </style>
+</head>
+<body class="min-h-screen text-champagne-200 antialiased relative selection:bg-gold-500 selection:text-burgundy-950">
+
+  <!-- Floating Sparkles Particle Overlay -->
+  <canvas id="sparklesCanvas"></canvas>
+
+  <!-- ENVELOPE UNBOXING ENTRANCE SCREEN -->
+  <div id="unboxingOverlay" class="fixed inset-0 z-50 flex items-center justify-center bg-burgundy-950 px-4 transition-all duration-1000">
+    
+    <div class="flex flex-col items-center justify-center w-full max-w-md text-center">
+      
+      <p class="font-cinzel text-xs tracking-[0.35em] text-gold-400 uppercase mb-6 animate-pulse">You Are Cordially Invited</p>
+
+      <!-- ENVELOPE CONTAINER -->
+      <div id="envelopeWrapper" class="envelope-wrapper" onclick="openEnvelope()">
+        
+        <!-- Flap -->
+        <div class="envelope-flap"></div>
+
+        <!-- Wax Seal -->
+        <div class="wax-seal-btn" title="Tap to open invitation">
+          <svg class="w-8 h-8 text-burgundy-950 fill-current" viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </div>
+
+        <!-- Floral Overlay Embellishment Elements -->
+        <!-- Top Left Peonies -->
+        <div class="absolute top-2 left-2 z-20 pointer-events-none opacity-90">
+          <svg width="90" height="90" viewBox="0 0 100 100" fill="none">
+            <path d="M20 20C35 5 65 10 50 35C35 60 5 45 20 20Z" fill="#7A1322" opacity="0.9"/>
+            <path d="M10 30C25 15 50 25 40 45C30 65 0 50 10 30Z" fill="#5A0D18" opacity="0.8"/>
+            <circle cx="35" cy="30" r="10" fill="#EFE3CE" opacity="0.95"/>
+            <circle cx="35" cy="30" r="5" fill="#D4AF37"/>
+            <path d="M5 15Q20 0 40 10" stroke="#D4AF37" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- Top Right Peonies -->
+        <div class="absolute top-2 right-2 z-20 pointer-events-none opacity-90 transform scale-x-[-1]">
+          <svg width="90" height="90" viewBox="0 0 100 100" fill="none">
+            <path d="M20 20C35 5 65 10 50 35C35 60 5 45 20 20Z" fill="#7A1322" opacity="0.9"/>
+            <path d="M10 30C25 15 50 25 40 45C30 65 0 50 10 30Z" fill="#5A0D18" opacity="0.8"/>
+            <circle cx="35" cy="30" r="10" fill="#EFE3CE" opacity="0.95"/>
+            <circle cx="35" cy="30" r="5" fill="#D4AF37"/>
+            <path d="M5 15Q20 0 40 10" stroke="#D4AF37" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- Inner Card -->
+        <div class="envelope-card">
+          <span class="font-cinzel text-[10px] tracking-widest text-burgundy-800 uppercase mb-1">Save The Date</span>
+          <h2 class="font-vibes text-4xl text-burgundy-900 font-bold mb-1">Mohamed & Rahma</h2>
+          <div class="w-16 h-0.5 bg-gold-500 my-2"></div>
+          <p class="font-playfair text-xs font-bold text-burgundy-800 tracking-widest">NOVEMBER 7, 2026</p>
+          <p class="font-cinzel text-[9px] text-burgundy-700/80 mt-3 tracking-wider uppercase">Moments Villa Zag</p>
+        </div>
+
+        <!-- Envelope Front Pocket -->
+        <div class="envelope-body">
+          <div class="absolute bottom-4 text-center z-10">
+            <span class="font-cinzel text-[11px] text-gold-300 tracking-[0.25em] uppercase font-semibold">Tap Heart Seal To Open</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FLOATING MUSIC CONTROL BUTTON -->
+  <button id="musicToggleBtn" onclick="toggleAudio()" class="fixed top-5 right-5 z-40 bg-burgundy-900/90 text-gold-400 p-3.5 rounded-full border border-gold-500/50 shadow-2xl backdrop-blur-md hover:bg-burgundy-800 transition-all duration-300 flex items-center justify-center group" title="Toggle Ambient Music">
+    <i id="musicIcon" data-lucide="music" class="w-5 h-5 text-gold-400"></i>
+  </button>
+
+  <!-- MAIN INVITATION CONTENT -->
+  <div id="mainContent" class="opacity-0 transition-opacity duration-1000 w-full max-w-2xl mx-auto px-4 py-8 md:py-16 flex flex-col gap-10 relative z-20">
+
+    <!-- Header Monogram Card -->
+    <header class="text-center glass-card rounded-3xl p-6 md:p-8 relative overflow-hidden border border-gold-500/40 shadow-2xl">
+      <div class="font-cinzel text-3xl font-bold font-gold-foil tracking-widest mb-1">M & R</div>
+      <p class="font-cinzel text-xs tracking-[0.3em] text-gold-400 uppercase">Save The Date</p>
+    </header>
+
+    <!-- COUPLE MAIN CARD -->
+    <section class="glass-card rounded-3xl p-6 md:p-10 text-center relative overflow-hidden shadow-2xl border-2 border-gold-500/40">
+      
+      <!-- PHOTO IN GOLDEN ARCH FRAME (NO EXTRA TEXT BANNER ABOVE IT) -->
+      <div class="arch-photo-container mb-8">
+        <div class="arch-photo-inner">
+          <img 
+            id="couplePhoto"
+            src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYEBQYHBwYIChAKCg8OCQ0OERERERERERERERERERERERERERERERERERERERERERERERERERERERH/2wBDAQYHB8ICAgoKCgoODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODgL/wAARCALAAn0DASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJCFDFBhACFBR2B8AAIBAwDAwMCBAEHAAEACwAA0QAQACEQMEIgUXEhMUMUFRYTIJIgY3Q1I4KjUXNyc1Uk4X/2wBDAP0A/0A="
+            alt="Mohamed and Rahma" 
+            class="w-full h-auto object-cover block"
+            onerror="this.onerror=null; this.src='photo.jpg';"
+          />
+        </div>
+      </div>
+
+      <!-- COUPLE NAMES DIRECTLY UNDER PHOTO -->
+      <h1 class="font-vibes text-6xl md:text-7xl font-gold-foil mb-2 drop-shadow-md">
+        Mohamed & Rahma
+      </h1>
+      <p class="font-cinzel text-base md:text-lg text-champagne-300 tracking-[0.25em] mb-6">
+        NOVEMBER 7, 2026
+      </p>
+
+      <p class="font-playfair italic text-sm md:text-base text-gold-200/90 max-w-md mx-auto leading-relaxed">
+        "Two hearts, one beautiful journey, and a lifetime of love waiting ahead. We would be honored to have you with us as we begin this new chapter together."
+      </p>
+    </section>
+
+    <!-- COUNTDOWN TIMER -->
+    <section class="glass-card rounded-3xl p-6 md:p-8 text-center border border-gold-500/40 shadow-2xl relative">
+      <h3 class="font-cinzel text-xs tracking-widest text-gold-400 uppercase mb-2">COUNTDOWN TO THE BIG DAY</h3>
+      <h2 class="font-playfair text-xl md:text-2xl text-champagne-100 font-bold mb-6">The Celebration Begins In</h2>
+
+      <div id="countdownGrid" class="grid grid-cols-4 gap-2 md:gap-4 max-w-md mx-auto">
+        <div class="bg-burgundy-950/90 rounded-2xl p-3 md:p-4 border border-gold-500/40 shadow-lg">
+          <span id="days" class="font-cinzel text-2xl md:text-4xl font-bold font-gold-foil block">00</span>
+          <span class="text-[10px] md:text-xs text-champagne-300 font-cinzel tracking-wider">DAYS</span>
+        </div>
+        <div class="bg-burgundy-950/90 rounded-2xl p-3 md:p-4 border border-gold-500/40 shadow-lg">
+          <span id="hours" class="font-cinzel text-2xl md:text-4xl font-bold font-gold-foil block">00</span>
+          <span class="text-[10px] md:text-xs text-champagne-300 font-cinzel tracking-wider">HOURS</span>
+        </div>
+        <div class="bg-burgundy-950/90 rounded-2xl p-3 md:p-4 border border-gold-500/40 shadow-lg">
+          <span id="minutes" class="font-cinzel text-2xl md:text-4xl font-bold font-gold-foil block">00</span>
+          <span class="text-[10px] md:text-xs text-champagne-300 font-cinzel tracking-wider">MINS</span>
+        </div>
+        <div class="bg-burgundy-950/90 rounded-2xl p-3 md:p-4 border border-gold-500/40 shadow-lg">
+          <span id="seconds" class="font-cinzel text-2xl md:text-4xl font-bold font-gold-foil block">00</span>
+          <span class="text-[10px] md:text-xs text-champagne-300 font-cinzel tracking-wider">SECS</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALENDAR CARD -->
+    <section class="glass-card rounded-3xl p-6 md:p-8 text-center border border-gold-500/40 shadow-2xl">
+      <div class="flex items-center justify-center gap-2 mb-1 text-gold-400">
+        <i data-lucide="calendar" class="w-5 h-5"></i>
+        <h3 class="font-cinzel text-lg font-bold tracking-widest">NOVEMBER 2026</h3>
+      </div>
+      <p class="text-xs text-champagne-300/80 mb-6 font-cinzel tracking-wider">MARK YOUR CALENDAR</p>
+
+      <div class="max-w-xs mx-auto text-xs font-cinzel">
+        <div class="grid grid-cols-7 gap-1 font-bold text-gold-400 mb-3 border-b border-gold-500/20 pb-2">
+          <span>SUN</span><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+        </div>
+        <div class="grid grid-cols-7 gap-2 text-center font-bold text-champagne-200">
+          <span class="p-2 text-gold-900/40">1</span>
+          <span class="p-2 text-gold-900/40">2</span>
+          <span class="p-2 text-gold-900/40">3</span>
+          <span class="p-2 text-gold-900/40">4</span>
+          <span class="p-2 text-gold-900/40">5</span>
+          <span class="p-2 text-gold-900/40">6</span>
+
+          <!-- Highlighted Day 7 -->
+          <div class="relative flex items-center justify-center">
+            <span class="w-8 h-8 rounded-full bg-gradient-to-tr from-gold-600 via-gold-400 to-gold-200 text-burgundy-950 font-black flex items-center justify-center shadow-lg shadow-gold-500/50 transform scale-110 border border-gold-100">
+              7
+            </span>
+            <span class="absolute -top-1 -right-1 text-[10px]">❤️</span>
+          </div>
+
+          <span class="p-2">8</span><span class="p-2">9</span><span class="p-2">10</span><span class="p-2">11</span><span class="p-2">12</span><span class="p-2">13</span><span class="p-2">14</span>
+          <span class="p-2">15</span><span class="p-2">16</span><span class="p-2">17</span><span class="p-2">18</span><span class="p-2">19</span><span class="p-2">20</span><span class="p-2">21</span>
+          <span class="p-2">22</span><span class="p-2">23</span><span class="p-2">24</span><span class="p-2">25</span><span class="p-2">26</span><span class="p-2">27</span><span class="p-2">28</span>
+          <span class="p-2">29</span><span class="p-2">30</span>
+        </div>
+      </div>
+
+      <button onclick="downloadICS()" class="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-gold-600 via-gold-500 to-gold-600 text-burgundy-950 font-extrabold text-xs shadow-lg hover:brightness-110 active:scale-95 transition-all font-cinzel tracking-wider">
+        <i data-lucide="calendar-plus" class="w-4 h-4"></i>
+        <span>Add To Calendar</span>
+      </button>
+    </section>
+
+    <!-- VENUE LOCATION CARD -->
+    <section class="glass-card rounded-3xl p-6 md:p-8 text-center border border-gold-500/40 shadow-2xl relative">
+      <div class="w-12 h-12 rounded-full bg-burgundy-900 border border-gold-500/40 text-gold-400 flex items-center justify-center mx-auto mb-4 shadow-lg">
+        <i data-lucide="map-pin" class="w-6 h-6"></i>
+      </div>
+      
+      <h3 class="font-cinzel text-xs tracking-widest text-gold-400 uppercase mb-1">THE VENUE</h3>
+      <h2 class="font-playfair text-2xl md:text-3xl font-bold text-champagne-100 mb-2">Moments Villa Zag</h2>
+      <p class="text-xs text-champagne-300/80 mb-6">Al-Ahrar Road, After Al-Ahrar Hospital, Zagazig</p>
+
+      <a href="https://maps.app.goo.gl/LJCFhJk9bfJRhZAC8?g_st=ic" target="_blank" class="block relative rounded-2xl overflow-hidden border border-gold-500/30 mb-6 bg-burgundy-950/60 p-6 hover:border-gold-500/60 transition group">
+        <div class="w-14 h-14 rounded-full bg-gold-500 text-burgundy-950 flex items-center justify-center shadow-xl mx-auto mb-2 group-hover:scale-110 transition-transform">
+          <i data-lucide="navigation" class="w-7 h-7"></i>
+        </div>
+        <p class="text-xs text-gold-300 font-bold tracking-wider">Tap To Open Location on Google Maps</p>
+      </a>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="https://maps.app.goo.gl/LJCFhJk9bfJRhZAC8?g_st=ic" target="_blank" class="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-burgundy-900 text-gold-300 border border-gold-500/50 hover:bg-burgundy-800 transition text-xs font-bold shadow-lg font-cinzel tracking-wider">
+          <i data-lucide="external-link" class="w-4 h-4"></i>
+          <span>Open in Maps</span>
+        </a>
+        <a href="https://maps.app.goo.gl/LJCFhJk9bfJRhZAC8?g_st=ic" target="_blank" class="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 text-burgundy-950 hover:brightness-110 transition text-xs font-extrabold shadow-lg font-cinzel tracking-wider">
+          <i data-lucide="map" class="w-4 h-4"></i>
+          <span>Get Directions</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- WEDDING TIMELINE SCHEDULE -->
+    <section class="glass-card rounded-3xl p-6 md:p-8 border border-gold-500/40 shadow-2xl">
+      <h3 class="font-playfair text-2xl font-bold text-center text-champagne-100 mb-8 tracking-wide">Program Timeline</h3>
+
+      <div class="relative max-w-md mx-auto">
+        <div class="absolute top-0 bottom-0 left-1/2 w-0.5 bg-gradient-to-b from-transparent via-gold-500/40 to-transparent transform -translate-x-1/2"></div>
+
+        <div class="space-y-6">
+          <div class="flex items-center gap-4 relative z-10">
+            <div class="flex-1 text-right font-cinzel text-xs font-bold text-gold-400">20:00</div>
+            <div class="w-4 h-4 rounded-full bg-gold-500 border-2 border-burgundy-950 shadow-md"></div>
+            <div class="flex-1 text-left bg-burgundy-950/70 p-3 rounded-xl border border-gold-500/20">
+              <p class="font-bold text-xs text-champagne-100">Guest Arrival</p>
+              <p class="text-[10px] text-champagne-300/70">Welcoming Guests</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4 relative z-10">
+            <div class="flex-1 text-right font-cinzel text-xs font-bold text-gold-400">20:30</div>
+            <div class="w-4 h-4 rounded-full bg-gold-500 border-2 border-burgundy-950 shadow-md"></div>
+            <div class="flex-1 text-left bg-burgundy-950/70 p-3 rounded-xl border border-gold-500/20">
+              <p class="font-bold text-xs text-champagne-100">Welcome & Seating</p>
+              <p class="text-[10px] text-champagne-300/70">Gathering & Music</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4 relative z-10">
+            <div class="flex-1 text-right font-cinzel text-xs font-bold text-gold-400">21:00</div>
+            <div class="w-4 h-4 rounded-full bg-gold-500 border-2 border-burgundy-950 shadow-md"></div>
+            <div class="flex-1 text-left bg-burgundy-950/70 p-3 rounded-xl border border-gold-500/20">
+              <p class="font-bold text-xs text-champagne-100">The Celebration Begins</p>
+              <p class="text-[10px] text-champagne-300/70">Entrance Ceremony</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4 relative z-10">
+            <div class="flex-1 text-right font-cinzel text-xs font-bold text-gold-400">22:00</div>
+            <div class="w-4 h-4 rounded-full bg-gold-500 border-2 border-burgundy-950 shadow-md"></div>
+            <div class="flex-1 text-left bg-burgundy-950/70 p-3 rounded-xl border border-gold-500/20">
+              <p class="font-bold text-xs text-champagne-100">Dinner</p>
+              <p class="text-[10px] text-champagne-300/70">Feast & Celebration</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-gold-500/20 text-center">
+        <div class="inline-flex items-center gap-2 text-gold-400 mb-1">
+          <i data-lucide="sparkles" class="w-4 h-4"></i>
+          <span class="font-cinzel font-bold text-xs tracking-widest">DRESS CODE</span>
+        </div>
+        <p class="text-xs text-champagne-200 mt-1">"Come dressed in your finest and celebrate this beautiful occasion with us."</p>
+      </div>
+    </section>
+
+    <!-- GIFT BOX CARD -->
+    <section class="glass-card rounded-3xl p-6 md:p-8 text-center border border-gold-500/40 shadow-2xl">
+      <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-burgundy-800 to-burgundy-600 border border-gold-500/50 text-gold-300 flex items-center justify-center mx-auto mb-4 shadow-xl cursor-pointer hover:scale-110 transition-transform" onclick="triggerGiftSurprise()">
+        <i data-lucide="gift" class="w-8 h-8"></i>
+      </div>
+
+      <h3 class="font-cinzel text-xl font-bold text-champagne-100 mb-2 tracking-widest">GIFT BOX</h3>
+      <p class="text-xs text-champagne-300/80 mb-6">A special message from Mohamed & Rahma</p>
+
+      <button onclick="triggerGiftSurprise()" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-burgundy-900 text-gold-300 border border-gold-500/50 hover:bg-burgundy-800 active:scale-95 transition-all text-xs font-bold shadow-lg font-cinzel tracking-wider">
+        <span>Tap to open</span>
+        <i data-lucide="sparkles" class="w-4 h-4 text-gold-400"></i>
+      </button>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 text-champagne-300/60 text-xs">
+      <p class="font-vibes text-4xl font-gold-foil mb-1">Mohamed & Rahma</p>
+      <p class="font-cinzel tracking-widest">WE LOOK FORWARD TO CELEBRATING WITH YOU</p>
+    </footer>
+
+  </div>
+
+  <!-- GIFT MODAL -->
+  <div id="giftModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 hidden transition-opacity duration-300">
+    <div class="glass-card rounded-3xl p-8 max-w-sm w-full text-center border-2 border-gold-500/60 shadow-2xl relative transform scale-95 transition-transform duration-300" id="giftModalCard">
+      <button onclick="closeGiftModal()" class="absolute top-4 right-4 text-gold-400 hover:text-gold-200">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+
+      <div class="text-5xl mb-4 animate-bounce">🎁</div>
+      <h3 class="font-playfair text-2xl font-bold text-champagne-100 mb-3">Thank You!</h3>
+      <p class="font-playfair italic text-sm text-gold-200/90 leading-relaxed mb-6">
+        "Your presence is the greatest gift we could ask for. Thank you for being part of our special day. ❤️"
+      </p>
+
+      <button onclick="closeGiftModal()" class="w-full py-3 rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-burgundy-950 font-extrabold text-xs shadow-lg hover:brightness-110 transition font-cinzel tracking-wider">
+        Close Message
+      </button>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    // 1. Sparkles Particle Animation
+    const canvas = document.getElementById('sparklesCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2.5 + 0.5;
+        this.speedY = Math.random() * 0.4 + 0.1;
+        this.opacity = Math.random() * 0.7 + 0.3;
+        this.color = Math.random() > 0.3 ? '#D4AF37' : '#FFFFFF';
+      }
+      update() {
+        this.y -= this.speedY;
+        if (this.y < 0) this.reset();
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = this.opacity;
+        ctx.shadowBlur = 6;
+        ctx.shadowColor = '#D4AF37';
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 60; i++) {
+      particles.push(new Particle());
+    }
+
+    function animateSparkles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateSparkles);
+    }
+    animateSparkles();
+
+    // 2. Web Audio API Background Music Synthesizer
+    let audioCtx = null;
+    let isPlaying = false;
+    let musicInterval = null;
+
+    function initAudioSynth() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playNote(freq, duration, type = 'sine', gainVal = 0.08) {
+      if (!audioCtx || audioCtx.state !== 'running') return;
+      
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+      gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+      gain.gain.linearRampToValueAtTime(gainVal, audioCtx.currentTime + 0.2);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    }
+
+    const romanticNotes = [261.63, 329.63, 392.00, 493.88, 523.25, 440.00, 349.23, 392.00];
+    let noteIdx = 0;
+
+    function startMusicSequence() {
+      if (musicInterval) clearInterval(musicInterval);
+      isPlaying = true;
+      updateMusicIcon();
+
+      musicInterval = setInterval(() => {
+        if (!isPlaying) return;
+        const freq = romanticNotes[noteIdx % romanticNotes.length];
+        playNote(freq, 2.5, 'sine', 0.05);
+        if (noteIdx % 2 === 0) playNote(freq * 0.5, 3.0, 'triangle', 0.03);
+        noteIdx++;
+      }, 1200);
+    }
+
+    function stopMusicSequence() {
+      isPlaying = false;
+      if (musicInterval) clearInterval(musicInterval);
+      updateMusicIcon();
+    }
+
+    function toggleAudio() {
+      initAudioSynth();
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      if (isPlaying) {
+        stopMusicSequence();
+      } else {
+        startMusicSequence();
+      }
+    }
+
+    function updateMusicIcon() {
+      const musicIcon = document.getElementById('musicIcon');
+      if (isPlaying) {
+        musicIcon.setAttribute('data-lucide', 'music-4');
+      } else {
+        musicIcon.setAttribute('data-lucide', 'music');
+      }
+      lucide.createIcons();
+    }
+
+    // 3. Open Envelope Animation & Transition
+    let isOpen = false;
+
+    function openEnvelope() {
+      if (isOpen) return;
+      isOpen = true;
+
+      const envelopeWrapper = document.getElementById('envelopeWrapper');
+      const overlay = document.getElementById('unboxingOverlay');
+      const mainContent = document.getElementById('mainContent');
+
+      // Add Envelope Unfolding Class
+      envelopeWrapper.classList.add('open');
+
+      // Initialize audio
+      initAudioSynth();
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      startMusicSequence();
+
+      // Confetti burst
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 120,
+          spread: 90,
+          origin: { y: 0.6 },
+          colors: ['#D4AF37', '#7A1322', '#FFF9E6']
+        });
+      }
+
+      // Smooth Fadeout
+      setTimeout(() => {
+        overlay.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => {
+          overlay.style.display = 'none';
+          mainContent.classList.remove('opacity-0');
+        }, 800);
+      }, 1000);
+    }
+
+    // 4. Countdown Timer to November 7, 2026 20:00:00
+    const targetDate = new Date('2026-11-07T20:00:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+
+      if (diff > 0) {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerText = String(days).padStart(2, '0');
+        document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+        document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+      } else {
+        document.getElementById('countdownGrid').innerHTML = "<div class='col-span-4 text-gold-400 font-bold py-4 text-lg font-cinzel'>TODAY IS THE BIG DAY! 🎉</div>";
+      }
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // 5. Download ICS Calendar Event
+    function downloadICS() {
+      const icsContent = 
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Mohamed & Rahma Wedding//EN
+BEGIN:VEVENT
+SUMMARY:Mohamed & Rahma Wedding
+DTSTART:20261107T180000Z
+DTEND:20261107T220000Z
+LOCATION:Moments Villa Zag, Al-Ahrar Road, After Al-Ahrar Hospital, Zagazig
+DESCRIPTION:Two hearts, one beautiful journey. Join us in celebrating Mohamed & Rahma's Wedding at Moments Villa Zag!
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR`;
+
+      const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.setAttribute('download', 'Mohamed_and_Rahma_Wedding.ics');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // 6. Interactive Gift Modal Logic
+    function triggerGiftSurprise() {
+      const modal = document.getElementById('giftModal');
+      const card = document.getElementById('giftModalCard');
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        card.classList.remove('scale-95');
+        card.classList.add('scale-100');
+      }, 50);
+
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 85,
+          spread: 80,
+          origin: { y: 0.5 },
+          colors: ['#D4AF37', '#F9F4EB', '#7A1322']
+        });
+      }
+    }
+
+    function closeGiftModal() {
+      const modal = document.getElementById('giftModal');
+      modal.classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
